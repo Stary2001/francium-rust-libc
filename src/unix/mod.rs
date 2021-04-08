@@ -410,6 +410,10 @@ cfg_if! {
         #[link(name = "bsd")]
         #[link(name = "pthread")]
         extern {}
+    } else if #[cfg(target_os = "francium")] {
+        #[link(name = "c")]
+        #[link(name = "gcc")]
+        extern {}
     } else {
         #[link(name = "c")]
         #[link(name = "m")]
@@ -1594,6 +1598,9 @@ cfg_if! {
     } else if #[cfg(target_os = "aix")] {
         mod aix;
         pub use self::aix::*;
+    } else if #[cfg(target_os = "francium")] {
+        mod mlibc;
+        pub use self::mlibc::*;
     } else {
         // Unknown target_os
     }
